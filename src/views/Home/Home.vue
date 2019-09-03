@@ -1,0 +1,167 @@
+<template>
+  <v-container fluid>
+    <v-row v-if="alert">
+      <!-- <v-col cols="12" md="6"></v-col> -->
+      <v-col cols="12" md="12">
+        <v-alert
+         border="top"
+         colored-border
+         type="error"
+          elevation="2">
+      <b>{{errorMsg}}</b>
+      </v-alert>
+      </v-col>
+      
+    </v-row>
+    
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card height="520" class="cardBorder" elevation = "9">
+          <v-card-title style="border-bottom:1px solid #657d87" class="title">Input</v-card-title>
+          <!-- form-content -->
+          <v-form class="formContent" ref="form" v-model="valid">
+            <v-select v-model="companyName" :rules="dropdownName" :items="companyList" label="Company Name"></v-select>
+            <v-select v-model="machine" :rules="dropdownName" :items="companyList" label="Machine"></v-select>
+            <v-select v-model="group" :rules="dropdownName" :items="groupList" label="Group"></v-select>
+            <v-select v-model="stat" :rules="dropdownName" :items="companyList" label="Stats"></v-select>
+            <v-text-field
+              v-model="threshold"
+              type="number"
+              label="Threshold"
+              required
+            ></v-text-field>
+          </v-form>
+          <!-- end -->
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-card height="520" class="cardBorder" elevation = "9">
+          <v-card-title
+            style="border-bottom:1px solid #657d87"
+            class="title"
+          >Customize Date Time ranges input</v-card-title>
+          <v-form class="formContent1">
+            <v-select v-model="quickTime"   :items="quicktimeList"  item-text="name"
+          item-value="value" :rules="dropdownName" label="Quick TIme"></v-select>
+          </v-form>
+          <p style="margin:0;font-weight:bold" class="text-center">----OR----</p>
+          <!--  -->
+          <v-form class="formContent2">
+            <!-- To date-->
+            <v-menu
+              ref="menu2"
+              v-model="menu2"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              full-width
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field :rules="number" v-model="toDate" label="To Date" readonly v-on="on"></v-text-field>
+              </template>
+              <v-date-picker v-model="toDate" no-title scrollable>
+                <div class="flex-grow-1"></div>
+                <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu2.save(date)">OK</v-btn>
+              </v-date-picker>
+            </v-menu>
+            <!-- To date end -->
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-model="toHour"
+                  type="number"
+                  :rules="number"
+                  label="To Hour"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  class="th"
+                  v-model="toMinutes"
+                  type="number"
+                  :rules="number"
+                  label="To Minutes"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <!-- From date-->
+            <v-menu
+              ref="menu1"
+              v-model="menu1"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              full-width
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field :rules="number" v-model="fromDate" label="From Date" readonly v-on="on"></v-text-field>
+              </template>
+              <v-date-picker v-model="fromDate" no-title scrollable>
+                <div class="flex-grow-1"></div>
+                <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu1.save(date)">OK</v-btn>
+              </v-date-picker>
+            </v-menu>
+            <!-- from date end -->
+
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-model="fromHour"
+                  type="number"
+                  :rules="number"
+                  label="From Hour"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  v-model="fromMinutes"
+                  type="number"
+                  :rules="number"
+                  label="From Minutes"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+    <div class="text-center">
+      <v-btn class="blue" dark color="primary" @click="getData" :disabled="!valid">Submit</v-btn>
+    </div>
+    
+  </v-container>
+</template>
+
+
+
+<script lang="ts" src = './Home.ts'>
+</script>
+
+<style lang="scss" scoped>
+</style>
+
+
+
+
+<style lang="scss" scoped>
+.formContent {
+  padding: 20px;
+}
+.formContent1 {
+  padding: 20px 20px 0 20px;
+}
+.formContent2 {
+  padding: 0 20px 20px 20px;
+}
+.cardBorder{
+  border-radius: 9px;
+}
+</style>
