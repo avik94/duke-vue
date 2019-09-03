@@ -29,7 +29,7 @@ export default new Router({
       component: ShowData
     },
     {
-      path: '/data-view',
+      path: '/data-view/:name',
       name: 'data-view',
       component: Statistics
     }

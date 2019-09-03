@@ -32,7 +32,7 @@
     <v-row>
       <v-col cols="12" md="3" v-for="item in buttonList"  :key="item.name">
         <div class="text-center">
-        <v-btn :color="item.color" medium min-width="220px" to="/data-view">
+        <v-btn :color="item.color" medium min-width="220px" :to="item.url">
           {{item.name}}
         </v-btn>
 
@@ -71,10 +71,10 @@ export default class ShowData extends Vue {
     quickTime = false;
     customTime = false;
     buttonList = [
-      { name: "Data Table" , color: "success" },
-      { name: "Line Plot", color: "primary" },
-      { name: "FFT", color: "warning" },
-      { name: "PSD", color: "info"}
+      { name: "Data Table" , color: "success", url: "data-view/data-table" },
+      { name: "Line Plot", color: "primary", url: "data-view/line-plot" },
+      { name: "FFT", color: "warning", url: "data-view/fft" },
+      { name: "PSD", color: "info", url: "data-view/psd"}
     ]
 
     
