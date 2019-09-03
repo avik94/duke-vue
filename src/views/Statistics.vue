@@ -11,12 +11,19 @@
             <v-tab-item>
               <!-- data-table -->
               <v-card class="tabContent">
-                <download-csv :data="desserts" class="text-right">
-                    <v-icon color="green" size="25">mdi-download</v-icon>
-                </download-csv>
                 <v-card-title>
-                  <div class="flex-grow-1"></div>
+                  <!-- <div class="flex-grow-1"></div> -->
                   <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+                  <div class="flex-grow-1"></div>
+                  <download-csv :data="desserts">
+                      <v-hover>
+                          <template v-slot="{ hover }">
+                              <v-btn text fab small :elevation="hover ? 4 : 0">
+                                  <v-icon color="green" size="25">mdi-download</v-icon>
+                              </v-btn>
+                          </template>
+                      </v-hover>
+                    </download-csv>
                 </v-card-title>
                 <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
               </v-card>
@@ -25,18 +32,22 @@
             <v-tab-item>
               <!-- line-plot -->
               <v-card flat color="basil">
-                <vue-plotly :data="data" :layout="layout" :options="options" />
+                <vue-plotly
+                  :data="linedata.data"
+                  :layout="linedata.layout"
+                  :options="linedata.options"
+                />
               </v-card>
               <!-- line-plot end -->
             </v-tab-item>
             <v-tab-item>
               <v-card flat color="basil">
-                <v-card-text>hello3</v-card-text>
+                <v-card-text>FFT</v-card-text>
               </v-card>
             </v-tab-item>
             <v-tab-item>
               <v-card flat color="basil">
-                <v-card-text>hello4</v-card-text>
+                <v-card-text>PSD</v-card-text>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
@@ -60,7 +71,11 @@ import JsonCSV from "vue-json-csv";
 
 Vue.component("downloadCsv", JsonCSV);
 
-@Component
+@Component({
+  components: {
+    VuePlotly
+  }
+})
 export default class Statistics extends Vue {
   // tab section
   tab: any = null;
@@ -127,9 +142,30 @@ export default class Statistics extends Vue {
   // Datatable-end
 
   // line- plot
-  data = [{ x: [1, 3], y: [2, 4] }];
-  layout = {};
-  options = {};
+  linedata = {
+    data: [
+      {
+        x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
+        y: [20, 80, 40, 65, 13, 75, 15],
+        type: "line",
+        name: "Series A"
+      },
+      {
+        x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
+        y: [40, 70, 50, 30, 90, 15, 60],
+        type: "line",
+        name: "Series B"
+      },
+      {
+        x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
+        y: [10, 30, 65, 25, 70, 50, 95],
+        type: "line",
+        name: "Series C"
+      }
+    ],
+    layout: {},
+    options: {}
+  };
   // line-plot end
 
   created() {
