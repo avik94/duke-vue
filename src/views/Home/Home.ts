@@ -23,6 +23,10 @@ export default class Home extends Vue {
   menu2 = false;
   date = new Date().toISOString().substr(0, 10)
   // calender end
+  time1 = false;
+  time1menu =  false;
+  time2menu =  false;
+  time1modal = false;
   // alert
   alert = false;
   errorMsg = ''
@@ -34,11 +38,9 @@ export default class Home extends Vue {
   stat = "";
   group = "";
   toDate = "";
-  toHour = "";
-  toMinutes = "";
+  toHourMinutes = "";
   fromDate = "";
-  fromHour = "";
-  fromMinutes = "";
+  fromHourMinutes = "";
   quickTime  = ""
   
 
@@ -53,7 +55,7 @@ export default class Home extends Vue {
   getData(){
     // console.log(this.threshold,this.companyName, this.machine, this.stat, this.group
     // ,this.toDate,this.toHour,this.fromMinutes,this.fromDate);
-    if(!this.quickTime && (!this.toDate || !this.toHour || !this.toMinutes || !this.fromDate || !this.fromHour || !this.fromMinutes)){
+    if(!this.quickTime && (!this.toDate || !this.toHourMinutes || !this.fromDate || !this.fromHourMinutes)){
         this.alert = true;
         this.errorMsg = "Please Select Time Section Properly "
         setTimeout(()=>{this.alert = false},2000); 
@@ -67,11 +69,10 @@ export default class Home extends Vue {
         threshold :this.threshold,
         quickTime : this.quickTime, 
         toDate : this.toDate,
-        toHour : this.toHour,
-        toMinutes : this.toMinutes,
+        toHourMinutes: this.toHourMinutes,
         fromDate : this.fromDate,
-        formHour : this.fromHour,
-        fromMinutes : this.fromMinutes
+        fromHourMinutes: this.fromHourMinutes
+       
       }
       this.$store.commit('storeFormData',formData);
       this.$router.push('show-data');

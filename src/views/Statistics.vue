@@ -67,9 +67,9 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import VuePlotly from "@statnett/vue-plotly";
-import JsonCSV from "vue-json-csv";
+// import JsonCSV from "vue-json-csv";
 
-Vue.component("downloadCsv", JsonCSV);
+// Vue.component("downloadCsv", JsonCSV);
 
 @Component({
   components: {
@@ -148,19 +148,19 @@ export default class Statistics extends Vue {
         x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
         y: [20, 80, 40, 65, 13, 75, 15],
         type: "line",
-        name: "Series A"
+        name: "vh1"
       },
       {
         x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
         y: [40, 70, 50, 30, 90, 15, 60],
         type: "line",
-        name: "Series B"
+        name: "vh2"
       },
       {
         x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
         y: [10, 30, 65, 25, 70, 50, 95],
         type: "line",
-        name: "Series C"
+        name: "vh3"
       }
     ],
     layout: {},

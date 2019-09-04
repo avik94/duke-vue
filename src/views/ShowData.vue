@@ -22,9 +22,9 @@
           </div>
           <div v-if = "customTime" class="cardContent">
             <p><span style="font-size:15px;padding: 10px 17px;  margin-right: 28px;"></span> <span style="margin: 0 70px;">To</span><span style="margin: 0 30px;">From</span></p>
-            <p><span style="font-size:15px;padding: 10px 17px; background: aliceblue; margin-right: 28px;">IST:</span> <span>3/8/2019 12:21</span><span style="margin-left:20px">3/8/2019 12:21</span></p>
-             <p><span style="font-size:14px;padding: 10px 15px; background: aliceblue; margin-right: 31px;">UTC:</span> <span>3/8/2019 12:21</span><span style="margin-left:20px">3/8/2019 12:21</span></p>
-            <p><span style="font-size:14px;padding: 10px 16px; background: aliceblue; margin-right: 30px;">EST:</span> <span>3/8/2019 12:21</span><span style="margin-left:20px">3/8/2019 12:21</span></p>
+            <p><span style="font-size:15px;padding: 10px 17px; background: aliceblue; margin-right: 28px;">IST:</span> <span>{{localDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</span><span style="margin-left:20px">{{localDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</span></p>
+             <p><span style="font-size:14px;padding: 10px 15px; background: aliceblue; margin-right: 31px;">UTC:</span> <span>{{utcDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</span><span style="margin-left:20px">{{utcDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</span></p>
+            <p><span style="font-size:14px;padding: 10px 16px; background: aliceblue; margin-right: 30px;">EST:</span> <span>{{estDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</span><span style="margin-left:20px">{{estDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</span></p>
           </div>
         </v-card>
       </v-col>
@@ -77,15 +77,46 @@ export default class ShowData extends Vue {
       { name: "PSD", color: "info", url: "data-view/psd"}
     ]
 
+    //time variables
+    localDateTimeFrom?:any
+    utcDateTimeFrom?:any
+    estDateTimeFrom?:any
+
+    localDateTimeTo?:any
+    utcDateTimeTo?:any
+    estDateTimeTo?:any
+    // end
     
     created(){
       console.log(this.$store.state.formData)
       this.formData = this.$store.state.formData;
       if(!this.formData.quickTime){
         this.customTime = true;
+        let x = this.timeConvertCustom(this.$store.state.formData.fromDate,this.$store.state.formData.fromHourMinutes);
+        this.localDateTimeFrom = x.localDateTime;
+        this.utcDateTimeFrom = x.utcDateTime;
+        this.estDateTimeFrom = x.estDateTime;
+
+        let y = this.timeConvertCustom(this.$store.state.formData.toDate,this.$store.state.formData.toHourMinutes);
+        this.localDateTimeTo = y.localDateTime;
+        this.utcDateTimeTo = y.utcDateTime;
+        this.estDateTimeTo = y.estDateTime;
       } else{
         this.quickTime = true;
       }     
+    }
+
+    timeConvertCustom(date:string,time:string){
+      let localDate = new Date(date+" "+time); 
+
+      let utcDate = localDate.getTime() + (localDate.getTimezoneOffset() * 60000);
+      let estDate = new Date(utcDate + (3600000*-5.0));
+      let result = {
+        localDateTime: localDate,
+        utcDateTime: new Date(utcDate),
+        estDateTime: estDate  
+      }
+      return(result);
     }
 }
 </script>
