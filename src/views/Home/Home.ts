@@ -14,7 +14,7 @@ export default class Home extends Vue {
   companyList = ["DukeMedicalEquiment", "prop-new", "Novatec"];
   groupList = ["MRI Health", "Energy Audit", "Drive Health"]
   quicktimeList = [
-    {name: "1 Minutes", value: "1m"}, {name: "5 Minutes", value: "5m"},{name: "10 Minutes", value: "10m"}, {name: "15 Minutes", value: "15m"}, {name: "30 Minutes", value: "30m"}, {name: "1 Hours", value: "1h"}, {name: "3 Hours", value: "3h"},
+    {name: "Select None", value: ""},{name: "1 Minutes", value: "1m"}, {name: "5 Minutes", value: "5m"},{name: "10 Minutes", value: "10m"}, {name: "15 Minutes", value: "15m"}, {name: "30 Minutes", value: "30m"}, {name: "1 Hours", value: "1h"}, {name: "3 Hours", value: "3h"},
     {name: "6 Hours", value: "6h"}, {name: "12 Hours", value: "12h"}, {name: "24 Hours", value: "24h"}, {name: "2 Days", value: "2d"}, {name: "3 Days", value: "3d"}    
   ]
 
@@ -76,8 +76,23 @@ export default class Home extends Vue {
       }
       this.$store.commit('storeFormData',formData);
       this.$router.push('show-data');
+      localStorage.form = JSON.stringify(formData);
     }
     
+  }
+  created(){    
+    let data = JSON.parse(localStorage.form);
+    console.log(data)
+    this.threshold = data.threshold;
+    this.companyName = data.companyName;
+    this.machine = data.machine;
+    this.stat = data.stat;
+    this.group = data.group;
+    this.toDate = data.toDate;
+    this.toHourMinutes = data.toHourMinutes;
+    this.fromDate = data.fromDate;
+    this.fromHourMinutes = data.fromHourMinutes;
+    this.quickTime  = data.quickTime;
   }
   
 }

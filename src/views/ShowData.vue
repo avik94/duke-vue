@@ -180,7 +180,7 @@ export default class ShowData extends Vue {
       let i = timeValueArray[timeValueArray.length-1];
       timeValueArray.pop();
       let min = timeValueArray.join("");
-      console.log(min,i)
+      // console.log(min,i)
       let quickTimeData = this.quickTimeConvert(parseInt(min),i);
       this.quickTimeLocal = quickTimeData.quickLocalDateTime;
       this.quickTimeUtc = quickTimeData.quickUtcDateTime;

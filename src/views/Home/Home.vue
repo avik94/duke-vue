@@ -42,7 +42,6 @@
               :items="quicktimeList"
               item-text="name"
               item-value="value"
-              :rules="dropdownName"
               prepend-icon="mdi-alarm-check"
               label="Quick TIme"
             ></v-select>

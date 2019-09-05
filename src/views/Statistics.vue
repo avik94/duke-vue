@@ -67,9 +67,9 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import VuePlotly from "@statnett/vue-plotly";
-// import JsonCSV from "vue-json-csv";
+import JsonCSV from "vue-json-csv";
 
-// Vue.component("downloadCsv", JsonCSV);
+Vue.component("downloadCsv", JsonCSV);
 
 @Component({
   components: {
@@ -86,58 +86,47 @@ export default class Statistics extends Vue {
   search = "";
   headers = [
     {
-      text: "Dessert (100g serving)",
+      text: "Time Stamp",
       align: "left",
       sortable: false,
-      value: "name"
+      value: "time_stamp"
     },
-    { text: "Calories", value: "calories" },
-    { text: "Fat (g)", value: "fat" },
-    { text: "Carbs (g)", value: "carbs" },
-    { text: "Protein (g)", value: "protein" },
-    { text: "Iron (%)", value: "iron" }
+    { text: "Ph1_Voltage_Variation", value: "Ph1_Voltage_Variation" },
+    { text: "Ph2_Voltage_Variation", value: "Ph2_Voltage_Variation" },
+    { text: "Ph3_Voltage_Variation", value: "Ph3_Voltage_Variation" },
   ];
   desserts = [
     {
-      name: "Frozen Yogurt",
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: "1%"
+      time_stamp: "time",
+      Ph1_Voltage_Variation: 1,
+      Ph2_Voltage_Variation: 1,
+      Ph3_Voltage_Variation: 1
     },
     {
-      name: "Ice cream sandwich",
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: "1%"
+      time_stamp: "time",
+      Ph1_Voltage_Variation: 1,
+      Ph2_Voltage_Variation: 1,
+      Ph3_Voltage_Variation: 1
     },
     {
-      name: "Eclair",
-      calories: 262,
-      fat: 16.0,
-      carbs: 23,
-      protein: 6.0,
-      iron: "7%"
+      time_stamp: "time",
+      Ph1_Voltage_Variation: 1,
+      Ph2_Voltage_Variation: 10,
+      Ph3_Voltage_Variation: 1
     },
     {
-      name: "Donut",
-      calories: 452,
-      fat: 25.0,
-      carbs: 51,
-      protein: 4.9,
-      iron: "22%"
+      time_stamp: "time",
+      Ph1_Voltage_Variation: 10,
+      Ph2_Voltage_Variation: 1,
+      Ph3_Voltage_Variation: 1
     },
     {
-      name: "KitKat",
-      calories: 518,
-      fat: 26.0,
-      carbs: 65,
-      protein: 7,
-      iron: "6%"
-    }
+      time_stamp: "time",
+      Ph1_Voltage_Variation: 0,
+      Ph2_Voltage_Variation: 1,
+      Ph3_Voltage_Variation: 1
+    },
+    
   ];
   // Datatable-end
 
