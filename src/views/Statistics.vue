@@ -20,7 +20,7 @@
                           <template v-slot="{ hover }">
                               <v-btn text fab small :elevation="hover ? 4 : 0">
                                   <v-icon color="green" size="25">mdi-download</v-icon>
-                              </v-btn>
+                              </v-btn> 
                           </template>
                       </v-hover>
                     </download-csv>

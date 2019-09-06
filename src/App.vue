@@ -10,7 +10,7 @@
         />
         <v-card-text class="white--text">I'm card text</v-card-text>
       </div>
-      <v-list height="5">
+      <v-list height="5" shaped dense nav>
         <v-list-item v-for="item in items" :key="item.title" :to="item.url">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>

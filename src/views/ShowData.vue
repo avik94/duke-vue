@@ -3,7 +3,22 @@
     <v-row>
       <v-col cols="12" md="5">
         <v-card elevation="9" class="cardBorder">
-          <v-card-title class="cardTitle">Input Data</v-card-title>
+          <v-card-title class="cardTitle">
+            <v-row>
+              <v-col cols="6">
+                <p>INPUT DATA</p>
+              </v-col>
+              <v-col cols="6" class="text-right">
+                <v-hover>
+                  <template v-slot="{ hover }">
+                    <v-btn text fab small :elevation="hover ? 4 : 0" to="/">
+                      <v-icon color="primary" size="20">mdi-pencil</v-icon>
+                    </v-btn>
+                  </template>
+                </v-hover>
+              </v-col>
+            </v-row>
+          </v-card-title>
           <div class="cardContent">
             <p>
               <span>
@@ -45,19 +60,34 @@
       </v-col>
       <v-col cols="12" md="7">
         <v-card elevation="7" class="cardBorder timeCardHeight">
-          <v-card-title class="cardTitle">Input Time</v-card-title>
+          <v-card-title class="cardTitle">
+            <v-row>
+              <v-col cols="6">
+                <p>INPUT TIME</p>
+              </v-col>
+            </v-row>
+          </v-card-title>
           <div v-if="quickTime" class="cardContent">
             <table>
               <tr>
-                <td class="text-center" style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;">LOCAL</td>
+                <td
+                  class="text-center"
+                  style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;"
+                >LOCAL</td>
                 <td class="time">{{quickTimeLocal | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
               <tr>
-                <td class="text-center" style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;">UTC</td>
+                <td
+                  class="text-center"
+                  style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;"
+                >UTC</td>
                 <td class="time">{{quickTimeUtc | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
               <tr>
-                <td class="text-center" style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;">EST</td>
+                <td
+                  class="text-center"
+                  style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;"
+                >EST</td>
                 <td class="time">{{quickTimeEst | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
             </table>
@@ -66,23 +96,38 @@
             <table>
               <tr>
                 <th></th>
-                <th>To</th>
                 <th>From</th>
+                <th>To</th>
               </tr>
               <tr>
-                <td class="text-center" style="font-size:15px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;">LOCAL</td>
-                <td class="time" style="border-top:1px solid #f2f2f2">{{localDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
-                <td class="time" style="border-top:1px solid #f2f2f2">{{localDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td
+                  class="text-center"
+                  style="font-size:15px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue;"
+                >LOCAL</td>
+                <td
+                  class="time"
+                  style="border-top:1px solid #f2f2f2"
+                >{{localDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td
+                  class="time"
+                  style="border-top:1px solid #f2f2f2"
+                >{{localDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
               <tr>
-                <td class="text-center" style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue">UTC</td>
-                <td class="time">{{utcDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td
+                  class="text-center"
+                  style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue"
+                >UTC</td>
                 <td class="time">{{utcDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td class="time">{{utcDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
               <tr>
-                <td class="text-center" style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue">EST</td>
-                <td class="time">{{estDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td
+                  class="text-center"
+                  style="font-size:14px;color:#1976d2;font-weight: bold;padding: 10px 17px;background:aliceblue"
+                >EST</td>
                 <td class="time">{{estDateTimeTo | moment("DD-MM-YYYY HH:mm:a")}}</td>
+                <td class="time">{{estDateTimeFrom | moment("DD-MM-YYYY HH:mm:a")}}</td>
               </tr>
             </table>
           </div>
@@ -102,6 +147,8 @@
 <style lang = "scss" scoped>
 .cardTitle {
   border-bottom: 1px solid #8080803d;
+  height: 57px;
+  padding: 0 20px;
 }
 .cardContent p {
   border-bottom: 1px solid #8080803d;
@@ -114,14 +161,18 @@
 .cardBorder {
   border-radius: 7px;
 }
-.time{
-  font-size:15px;
+.time {
+  font-size: 15px;
   padding: 10px 17px;
   border-bottom: 1px solid #f2f2f2;
 }
-/* .timeCardHeight{
-  height: 336px;
-} */
+.cardTitle p {
+  margin-bottom: 0;
+  font-size: 17px;
+  font-weight: bold;
+  color: #303131;
+  letter-spacing: 0.3px;
+}
 </style>
 
 <script lang="ts">
@@ -141,9 +192,9 @@ export default class ShowData extends Vue {
   ];
 
   //time variables
-  quickTimeLocal?:any;
-  quickTimeUtc?:any;
-  quickTimeEst?:any;
+  quickTimeLocal?: any;
+  quickTimeUtc?: any;
+  quickTimeEst?: any;
 
   localDateTimeFrom?: any;
   utcDateTimeFrom?: any;
@@ -176,16 +227,15 @@ export default class ShowData extends Vue {
       this.estDateTimeTo = y.estDateTime;
     } else {
       this.quickTime = true;
-      let timeValueArray = this.formData.quickTime.split("")
-      let i = timeValueArray[timeValueArray.length-1];
+      let timeValueArray = this.formData.quickTime.split("");
+      let i = timeValueArray[timeValueArray.length - 1];
       timeValueArray.pop();
       let min = timeValueArray.join("");
       // console.log(min,i)
-      let quickTimeData:any = this.quickTimeConvert(parseInt(min),i);
+      let quickTimeData: any = this.quickTimeConvert(parseInt(min), i);
       this.quickTimeLocal = quickTimeData.quickLocalDateTime;
       this.quickTimeUtc = quickTimeData.quickUtcDateTime;
       this.quickTimeEst = quickTimeData.quickEstDateTime;
-      
     }
   }
 
@@ -202,7 +252,7 @@ export default class ShowData extends Vue {
     return result;
   }
 
-  quickTimeConvert(min:number,i:string){
+  quickTimeConvert(min: number, i: string) {
     // let i = "d";
     // let min = 2;
     if (i === "m") {
@@ -215,7 +265,6 @@ export default class ShowData extends Vue {
         quickEstDateTime: estDate
       };
       return result;
-
     } else if (i === "h") {
       let timedate = new Date(Date.now() - 1000 * 3600 * min);
       let utcDate = timedate.getTime() + timedate.getTimezoneOffset() * 60000;
@@ -238,11 +287,7 @@ export default class ShowData extends Vue {
       return result;
     }
 
-
-
     let localDate = new Date();
-
-    
   }
 }
 </script>
