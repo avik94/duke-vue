@@ -22,10 +22,34 @@
               prepend-icon="mdi-briefcase"
               label="Company Name"
             ></v-select>
-            <v-select v-model="machine" :rules="dropdownName" :items="companyList"  prepend-icon="mdi-settings" label="Machine"></v-select>
-            <v-select v-model="group" :rules="dropdownName" :items="groupList" prepend-icon="mdi-cube" label="Group"></v-select>
-            <v-select v-model="stat" :rules="dropdownName" :items="companyList" prepend-icon="mdi-math-compass" label="Stats"></v-select>
-            <v-text-field v-model="threshold" type="number" prepend-icon="mdi-flash" label="Threshold" required></v-text-field>
+            <v-select
+              v-model="machine"
+              :rules="dropdownName"
+              :items="companyList"
+              prepend-icon="mdi-settings"
+              label="Machine"
+            ></v-select>
+            <v-select
+              v-model="group"
+              :rules="dropdownName"
+              :items="groupList"
+              prepend-icon="mdi-cube"
+              label="Group"
+            ></v-select>
+            <v-select
+              v-model="stat"
+              :rules="dropdownName"
+              :items="companyList"
+              prepend-icon="mdi-math-compass"
+              label="Stats"
+            ></v-select>
+            <v-text-field
+              v-model="threshold"
+              type="number"
+              prepend-icon="mdi-flash"
+              label="Threshold"
+              required
+            ></v-text-field>
           </v-form>
           <!-- end -->
         </v-card>
@@ -36,7 +60,7 @@
             style="border-bottom:1px solid #657d87"
             class="title"
           >Customize Date Time ranges input</v-card-title>
-          <v-form class="formContent1">
+          <v-form class="formContent1" ref="form2">
             <v-select
               v-model="quickTime"
               :items="quicktimeList"
@@ -60,7 +84,14 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field :rules="number" v-model="toDate"  prepend-icon="mdi-calendar-check" label="To Date" readonly v-on="on"></v-text-field>
+                <v-text-field
+                  :rules="number"
+                  v-model="toDate"
+                  prepend-icon="mdi-calendar-check"
+                  label="To Date"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
               </template>
               <v-date-picker v-model="toDate" no-title scrollable>
                 <div class="flex-grow-1"></div>
@@ -168,8 +199,8 @@
                   required
                 ></v-text-field>
               </v-col>
-            </v-row> -->
-             <v-menu
+            </v-row>-->
+            <v-menu
               ref="selectTime2"
               v-model="time2menu"
               :close-on-content-click="false"
@@ -203,7 +234,8 @@
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-btn class="blue" dark color="primary" @click="getData" :disabled="!valid">Submit</v-btn>
+      <v-btn class="btnCustom" dark color="primary" @click="getData" :disabled="!valid">Submit</v-btn>
+      <v-btn class="btnCustom" dark color="warning" @click="clearData" :disabled="!valid">Reset</v-btn>
     </div>
   </v-container>
 </template>
@@ -212,12 +244,6 @@
 
 <script lang="ts" src = './Home.ts'>
 </script>
-
-<style lang="scss" scoped>
-</style>
-
-
-
 
 <style lang="scss" scoped>
 .formContent {
@@ -231,5 +257,8 @@
 }
 .cardBorder {
   border-radius: 9px;
+}
+.btnCustom {
+  margin: 5px;
 }
 </style>

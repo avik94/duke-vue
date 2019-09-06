@@ -66,7 +66,9 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+//@ts-ignore
 import VuePlotly from "@statnett/vue-plotly";
+//@ts-ignore
 import JsonCSV from "vue-json-csv";
 
 Vue.component("downloadCsv", JsonCSV);
