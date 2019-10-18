@@ -169,7 +169,7 @@ export default class Statistics extends Vue {
     } else {
       this.tab = 3;
     }
-    console.log(this.$store.state.formData);
+    // console.log(this.$store.state.formData);
   }
 }
 </script>

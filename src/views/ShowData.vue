@@ -20,13 +20,13 @@
             </v-row>
           </v-card-title>
           <div class="cardContent">
-            <p>
+            <!-- <p>
               <span>
                 <v-icon color="primary" size="20" style="padding-right:5px">mdi-briefcase</v-icon>
               </span>
               <b>Company:&nbsp;</b>
               {{formData.companyName}}
-            </p>
+            </p> -->
             <p>
               <span>
                 <v-icon color="primary" size="20" style="padding-right:5px">mdi-settings</v-icon>
@@ -206,7 +206,6 @@ export default class ShowData extends Vue {
   // end
 
   created() {
-    console.log(this.$store.state.formData);
     this.formData = this.$store.state.formData;
     if (!this.formData.quickTime) {
       this.customTime = true;

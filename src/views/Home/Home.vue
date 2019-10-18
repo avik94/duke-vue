@@ -15,13 +15,13 @@
           <v-card-title style="border-bottom:1px solid #657d87" class="title">Input</v-card-title>
           <!-- form-content -->
           <v-form class="formContent" ref="form" v-model="valid">
-            <v-select
+            <!-- <v-select
               v-model="companyName"
               :rules="dropdownName"
               :items="companyList"
               prepend-icon="mdi-briefcase"
               label="Company Name"
-            ></v-select>
+            ></v-select> -->
             <v-select
               v-model="machine"
               :rules="dropdownName"
@@ -35,11 +35,12 @@
               :items="groupList"
               prepend-icon="mdi-cube"
               label="Group"
+              @change="clickGroup(group)"
             ></v-select>
             <v-select
               v-model="stat"
               :rules="dropdownName"
-              :items="companyList"
+              :items="statList"
               prepend-icon="mdi-math-compass"
               label="Stats"
             ></v-select>
