@@ -25,7 +25,7 @@
             <v-select
               v-model="machine"
               :rules="dropdownName"
-              :items="companyList"
+              :items="machineListName"
               prepend-icon="mdi-settings"
               label="Machine"
             ></v-select>
