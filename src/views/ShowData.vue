@@ -20,13 +20,6 @@
             </v-row>
           </v-card-title>
           <div class="cardContent">
-            <!-- <p>
-              <span>
-                <v-icon color="primary" size="20" style="padding-right:5px">mdi-briefcase</v-icon>
-              </span>
-              <b>Company:&nbsp;</b>
-              {{formData.companyName}}
-            </p> -->
             <p>
               <span>
                 <v-icon color="primary" size="20" style="padding-right:5px">mdi-settings</v-icon>
@@ -187,8 +180,8 @@ export default class ShowData extends Vue {
   buttonList = [
     { name: "Data Table", color: "success", url: "data-view/data-table" },
     { name: "Line Plot", color: "primary", url: "data-view/line-plot" },
-    { name: "FFT", color: "warning", url: "data-view/fft" },
-    { name: "PSD", color: "info", url: "data-view/psd" }
+    // { name: "FFT", color: "info", url: "data-view/fft" },
+    { name: "PSD", color: "warning", url: "data-view/psd" }
   ];
 
   //time variables
