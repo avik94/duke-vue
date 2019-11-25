@@ -125,27 +125,6 @@
               ></v-time-picker>
             </v-menu>
             <!-- =============================== -->
-            <!-- <v-row>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="toHour"
-                  type="number"
-                  :rules="number"
-                  label="To Hour"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  class="th"
-                  v-model="toMinutes"
-                  type="number"
-                  :rules="number"
-                  label="To Minutes"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>-->
 
             <!-- From date-->
             <v-menu
@@ -174,27 +153,6 @@
               </v-date-picker>
             </v-menu>
             <!-- from date end -->
-
-            <!-- <v-row>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="fromHour"
-                  type="number"
-                  :rules="number"
-                  label="From Hour"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="fromMinutes"
-                  type="number"
-                  :rules="number"
-                  label="From Minutes"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>-->
             <v-menu
               ref="selectTime2"
               v-model="time2menu"
@@ -257,3 +215,5 @@
   margin: 5px;
 }
 </style>
+
+

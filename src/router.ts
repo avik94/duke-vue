@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home/Home.vue';
 import ShowData from './views/ShowData.vue';
-import Statistics from './views/Statistics.vue';
+import Statistics from './views/Statistics/Statistics.vue';
 
 Vue.use(Router);
 

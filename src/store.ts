@@ -6,15 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     formData: "",
-    // avik:[]
+    machineList:[]
   },
   mutations: {
     storeFormData(state,data){
       state.formData = data
     },
-    // test(state,data){
-    //   state.avik = data
-    // }
+    storeMachine(state,data){
+      state.machineList = data
+    }
   },
   actions: {
 

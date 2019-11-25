@@ -13,7 +13,7 @@ export default class Home extends Vue {
   name = "Input Field";
   machineListName = ["DukeMedicalEquiment", "prop-new", "Novatec"];
   groupList = ["MRI Health", "Energy Audit", "Drive Health"]
-  statList = ["Voltage", "Current", "Vibration"];
+  statList:string[] = [];
   quicktimeList = [
     {name: "1 Minutes", value: "1m"}, {name: "5 Minutes", value: "5m"},{name: "10 Minutes", value: "10m"}, {name: "15 Minutes", value: "15m"}, 
     {name: "30 Minutes", value: "30m"}, {name: "1 Hours", value: "1h"}, {name: "3 Hours", value: "3h"},
@@ -36,7 +36,6 @@ export default class Home extends Vue {
   // end
 
   threshold = "";
-  // companyName = "";
   machine = "";
   stat = "";
   group = "";
@@ -80,26 +79,26 @@ export default class Home extends Vue {
       this.fromDate = data.fromDate;
       this.fromHourMinutes = data.fromHourMinutes;
       this.quickTime  = data.quickTime;
-      // if(this.group === "MRI Health"){
-      //   this.statList = [
-      //     'Voltage(L-N)','Voltage(L-L)', 'Current-3 phase', 'Neutral current', 'Step Current Change (A)', 'PF-3 phase','Voltage variation (%)',                          
-      //     'Voltage Total Harmonic Distortion (%)', 'Current Total Harmonic Distortion (%)','Frequency Variation (%)'
-      //   ]
-      // }
-      // if(this.group === "Energy Audit"){
-      //   this.statList = [
-      //     'Voltage', 'Current', 'Power Factor', 'Active Power', 'Reactive Power','Voltage Total Harmonic Distortion',
-      //     'Voltage Total Harmonic Distortion 95th Percentile', 'Voltage Total Harmonic Distortion 99th Percentile', 
-      //     'Current Total Harmonic Distortion', 'Current Total Harmonic Distortion 95th Percentile', 'Current Total Harmonic Distortion 99th Percentile',    
-      //     'Frequency Variation', 'Maximum Demand Load current', 'Short-Circuit Ratio'
-      //   ]
-      // }
-      // if(this.group === "Drive Health"){
-      //   this.statList = [
-      //     'Voltage', 'Current', 'Voltage variation', 'Voltage Total Harmonic Distortion', 'Current Total Harmonic Distortion',                                                       
-      //     'Frequency Variation', 'Drive Temperature'
-      //   ]
-      // }
+      if(this.group === "MRI Health"){
+        this.statList = [
+          'Voltage(L-N)','Voltage(L-L)', 'Current-3 phase', 'Neutral current', 'Step Current Change (A)', 'PF-3 phase','Voltage variation (%)',                          
+          'Voltage Total Harmonic Distortion (%)', 'Current Total Harmonic Distortion (%)','Frequency Variation (%)'
+        ]
+      }
+      if(this.group === "Energy Audit"){
+        this.statList = [
+          'Voltage', 'Current', 'Power Factor', 'Active Power', 'Reactive Power','Voltage Total Harmonic Distortion',
+          'Voltage Total Harmonic Distortion 95th Percentile', 'Voltage Total Harmonic Distortion 99th Percentile', 
+          'Current Total Harmonic Distortion', 'Current Total Harmonic Distortion 95th Percentile', 'Current Total Harmonic Distortion 99th Percentile',    
+          'Frequency Variation', 'Maximum Demand Load current', 'Short-Circuit Ratio'
+        ]
+      }
+      if(this.group === "Drive Health"){
+        this.statList = [
+          'Voltage', 'Current', 'Voltage variation', 'Voltage Total Harmonic Distortion', 'Current Total Harmonic Distortion',                                                       
+          'Frequency Variation', 'Drive Temperature'
+        ]
+      }
     }   
 
   }
@@ -113,7 +112,6 @@ export default class Home extends Vue {
     }
     else{
       let formData = {
-        // companyName : this.companyName, 
         machine : this.machine,
         stat : this.stat,
         group : this.group,
@@ -126,6 +124,7 @@ export default class Home extends Vue {
        
       }
       this.$store.commit('storeFormData',formData);
+      this.$store.commit('storeMachine',this.machineListName)
       this.$router.push('data-view/line');
       sessionStorage.setItem('form', JSON.stringify(formData));
       let formDataCopy = {...formData};
@@ -143,26 +142,26 @@ export default class Home extends Vue {
   }
 
   clickGroup(data:any){
-    // if(data === "MRI Health"){
-    //   this.statList = [
-    //     'Voltage(L-N)','Voltage(L-L)', 'Current-3 phase', 'Neutral current', 'Step Current Change (A)', 'PF-3 phase','Voltage variation (%)',                          
-    //     'Voltage Total Harmonic Distortion (%)', 'Current Total Harmonic Distortion (%)','Frequency Variation (%)'
-    //   ]
-    // }
-    // if(data === "Energy Audit"){
-    //   this.statList = [
-    //     'Voltage', 'Current', 'Power Factor', 'Active Power', 'Reactive Power','Voltage Total Harmonic Distortion',
-    //     'Voltage Total Harmonic Distortion 95th Percentile', 'Voltage Total Harmonic Distortion 99th Percentile', 
-    //     'Current Total Harmonic Distortion', 'Current Total Harmonic Distortion 95th Percentile', 'Current Total Harmonic Distortion 99th Percentile',    
-    //     'Frequency Variation', 'Maximum Demand Load current', 'Short-Circuit Ratio'
-    //   ]
-    // }
-    // if(data === "Drive Health"){
-    //   this.statList = [
-    //     'Voltage', 'Current', 'Voltage variation', 'Voltage Total Harmonic Distortion', 'Current Total Harmonic Distortion',                                                       
-    //     'Frequency Variation', 'Drive Temperature'
-    //   ]
-    // }
+    if(data === "MRI Health"){
+      this.statList = [
+        'Voltage(L-N)','Voltage(L-L)', 'Current-3 phase', 'Neutral current', 'Step Current Change (A)', 'PF-3 phase','Voltage variation (%)',                          
+        'Voltage Total Harmonic Distortion (%)', 'Current Total Harmonic Distortion (%)','Frequency Variation (%)'
+      ]
+    }
+    if(data === "Energy Audit"){
+      this.statList = [
+        'Voltage', 'Current', 'Power Factor', 'Active Power', 'Reactive Power','Voltage Total Harmonic Distortion',
+        'Voltage Total Harmonic Distortion 95th Percentile', 'Voltage Total Harmonic Distortion 99th Percentile', 
+        'Current Total Harmonic Distortion', 'Current Total Harmonic Distortion 95th Percentile', 'Current Total Harmonic Distortion 99th Percentile',    
+        'Frequency Variation', 'Maximum Demand Load current', 'Short-Circuit Ratio'
+      ]
+    }
+    if(data === "Drive Health"){
+      this.statList = [
+        'Voltage', 'Current', 'Voltage variation', 'Voltage Total Harmonic Distortion', 'Current Total Harmonic Distortion',                                                       
+        'Frequency Variation', 'Drive Temperature'
+      ]
+    }
 
     console.log(data);
   }  
