@@ -1,11 +1,9 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import ShowData from "@/components/ShowData.vue";
 import axios from 'axios';
 
 @Component({
   components: {
-    ShowData
   }
 })
 export default class Home extends Vue {

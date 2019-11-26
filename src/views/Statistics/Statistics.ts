@@ -4,12 +4,14 @@ import { Component } from "vue-property-decorator";
 import VuePlotly from "@statnett/vue-plotly";
 //@ts-ignore
 import JsonCSV from "vue-json-csv";
+import EventTrap from "../../components/EventTrap.vue";
 
 Vue.component("downloadCsv", JsonCSV);
 
 @Component({
   components: {
-    VuePlotly
+    VuePlotly,
+    EventTrap
   }
 })
 
@@ -26,14 +28,15 @@ export default class Statistics extends Vue {
   time1modal = false;
 
   // max min logic
-  isActive?:boolean;
+  maxMin?:boolean;
+  normal?:boolean;
 
   formData!: any;
 
   // tab section
   tab: any = 0;
   machineList = [];
-  statList = ["Voltage", "Current", "Vibration"];
+  statList:string[] = [];
   groupList = ["MRI Health", "Energy Audit", "Drive Health"];
   items = ["Line Plot", "Max", "Min", "FFT","Event Trap", "Data Table"]; 
   // tab section end
@@ -103,7 +106,7 @@ export default class Statistics extends Vue {
       {
         x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
         y: [10, 30, 65, 25, 70, 50, 95],
-        type: "line",
+        type: "wave",
         name: "vh3"
       }
     ],
@@ -143,11 +146,13 @@ export default class Statistics extends Vue {
 
     if(this.stat === "Voltage" || this.stat === "Current"){
         this.items = ["Line Plot", "Max", "Min", "FFT",  "Event Trap", "Data Table"];
-        this.isActive = false;
+        this.maxMin = true;
+        this.normal = false;
         this.tab = 0;
     }else{
         this.items = ["Line Plot", "FFT",  "Event Trap", "Data Table"];
-        this.isActive = true;
+        this.maxMin = false;
+        this.normal = true;
         this.tab = 0;
 
     }
@@ -191,6 +196,13 @@ export default class Statistics extends Vue {
 
   submitTimeInput(){
     this.dialog = false;
+    console.log(this.machine);
+    console.log(this.stat);
+    console.log(this.group);
+    console.log(this.threshold);
+    console.log(this.quickTime);
+    console.log(this.fromDate);
+    console.log(this.fromHourMinutes);
     console.log(this.toDate);
     console.log(this.toHourMinutes);
     
@@ -219,13 +231,15 @@ export default class Statistics extends Vue {
     }
   }
   clickStat(data:any){
-    if(this.stat === "Voltage" || this.stat === "Current"){
+    if(data === "Voltage" || data === "Current"){
         this.items = ["Line Plot", "Max", "Min", "FFT",  "Event Trap", "Data Table"];
-        this.isActive = false;
+        this.maxMin = true;
+        this.normal = false;
         this.tab = 0;
     }else{
         this.items = ["Line Plot", "FFT",  "Event Trap", "Data Table"];
-        this.isActive = true;
+        this.maxMin = false;
+        this.normal = true;
         this.tab = 0;
 
     }

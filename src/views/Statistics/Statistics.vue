@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <v-row style="padding: 0 6px;">
       <v-col cols="12">
         <!-- machine & stat row start -->
         <v-row>
@@ -205,7 +205,7 @@
     <!-- tab section start here -->
     <v-row>
       <v-col cols="12">
-        <v-card>
+        <v-card v-if="maxMin">
           <v-tabs v-model="tab" background-color="transparent" color="#072d97" grow>
             <v-tab v-for="(item, index) in items" :key="index">{{ item }} </v-tab>
           </v-tabs>
@@ -222,12 +222,12 @@
               </v-card>
               <!-- line-plot end -->
             </v-tab-item>
-            <v-tab-item v-bind:class="{ active: isActive }">
+            <v-tab-item >
               <v-card flat color="basil">
                 <v-card-text>Max</v-card-text>
               </v-card>
-            </v-tab-item>
-            <v-tab-item v-bind:class="{ active: isActive }">
+            </v-tab-item >
+            <v-tab-item >
               <v-card flat color="basil">
                 <v-card-text>Min</v-card-text>
               </v-card>
@@ -239,7 +239,7 @@
             </v-tab-item>
             <v-tab-item>
               <v-card flat color="basil">
-                <v-card-text>Event Trap</v-card-text>
+                <EventTrap v-bind:statData="statList"></EventTrap>
               </v-card>
             </v-tab-item> 
             <v-tab-item>
@@ -265,21 +265,77 @@
             </v-tab-item>          
           </v-tabs-items>
         </v-card>
+
+        <v-card v-if="normal">
+          <v-tabs v-model="tab" background-color="transparent" color="#072d97" grow>
+            <v-tab v-for="(item, index) in items" :key="index">{{ item }} </v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="tab">
+            <!-- line plot -->
+            <v-tab-item >
+              <!-- line-plot -->
+              <v-card flat color="basil">
+                <vue-plotly
+                  :data="linedata.data"
+                  :layout="linedata.layout"
+                  :options="linedata.options"
+                />
+              </v-card>
+              <!-- line-plot end -->
+            </v-tab-item>
+            <!-- end line plot -->
+            <!-- fft -->
+            <v-tab-item >
+              <v-card flat color="basil">
+                <v-card-text>FFT</v-card-text>
+              </v-card>
+            </v-tab-item>
+            <!-- end fft -->
+            <!-- event trap -->
+            <v-tab-item>
+              <v-card flat color="basil">
+                <EventTrap></EventTrap>
+              </v-card>
+            </v-tab-item> 
+            <!-- end event trap -->
+            <!-- data table -->
+            <v-tab-item>
+              <!-- data-table -->
+              <v-card class="tabContent">
+                <v-card-title>
+                  <!-- <div class="flex-grow-1"></div> -->
+                  <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+                  <div class="flex-grow-1"></div>
+                  <download-csv :data="desserts">
+                    <v-hover>
+                      <template v-slot="{ hover }">
+                        <v-btn text fab small :elevation="hover ? 4 : 0">
+                          <v-icon color="green" size="25">mdi-download</v-icon>
+                        </v-btn>
+                      </template>
+                    </v-hover>
+                  </download-csv>
+                </v-card-title>
+                <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+              </v-card>
+              <!-- data-table-end -->
+            </v-tab-item>    
+            <!-- end data table -->
+          </v-tabs-items>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<style lang = "scss" scoped>
-.tabContent {
-  padding: 35px;
-}
-</style>
-
 <script lang="ts" src = "./Statistics.ts">
 </script>
 
 <style lang = "scss" scoped>
+.tabContent {
+  padding: 35px;
+}
 .cardContent p {
   border-bottom: 1px solid #8080803d;
   color: #363535b9;
