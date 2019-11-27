@@ -239,7 +239,7 @@
             </v-tab-item>
             <v-tab-item>
               <v-card flat color="basil">
-                <EventTrap v-bind:statData="statList"></EventTrap>
+                <EventTrap :statData="statList"></EventTrap>
               </v-card>
             </v-tab-item> 
             <v-tab-item>
@@ -295,7 +295,7 @@
             <!-- event trap -->
             <v-tab-item>
               <v-card flat color="basil">
-                <EventTrap></EventTrap>
+                <EventTrap :statData="statList"></EventTrap>
               </v-card>
             </v-tab-item> 
             <!-- end event trap -->

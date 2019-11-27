@@ -47,18 +47,18 @@ import { Component, Prop  } from "vue-property-decorator";
   }
 })
 export default class EventTrap extends Vue {
-  @Prop() statData?:string[];
+  // @ts-ignore
+  @Prop() statData;
 
   eventTime = "";
   statEvent = "";
   
   created(){ 
     // this.statDropdown = this.statData;
-    // console.log(this.statData)
   }
 
   dateDropDown = ["26-11-2019 15:30", "27-11-2019 17:30"];
-  statDropdown:string[] = ["Voltage", "Current", "Frequency Variaion"];
+  statDropdown = ["Voltage", "Current", "Frequency Variaion"]; // it will be changed later
 
   // line- plot
   linedata = {
