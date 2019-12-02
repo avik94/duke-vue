@@ -52,9 +52,11 @@ export default class Home extends Vue {
     (v:any) => !!v || 'data is required',
   ]
 
+  test?:any;
   async created(){
     // api call
     let x = await axios.get(`http://40.87.93.175:5000/api/zone?filter={%22where%22:{%22companyId%22:%225b1abafc00001e0ae9c605c5%22},%20%22include%22:%20{%22relation%22:%22machines%22,%22scope%22:{%22where%22:{%22view_type%22:2}}}}`);
+    console.log(x);
     let machineList = [];
     for (let i of x.data){
       if(i.machines.length != 0){

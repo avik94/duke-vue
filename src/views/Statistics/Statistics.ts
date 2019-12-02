@@ -5,13 +5,17 @@ import VuePlotly from "@statnett/vue-plotly";
 //@ts-ignore
 import JsonCSV from "vue-json-csv";
 import EventTrap from "../../components/EventTrap.vue";
+import DataTable from "../../components/DataTable.vue";
+import LinePlot from "../../components/LinePlot.vue";
 
 Vue.component("downloadCsv", JsonCSV);
 
 @Component({
   components: {
     VuePlotly,
-    EventTrap
+    EventTrap,
+    DataTable,
+    LinePlot
   }
 })
 
@@ -42,18 +46,18 @@ export default class Statistics extends Vue {
   // tab section end
 
   // Datatable Section
-  search = "";
-  headers = [
-    {
-      text: "Time Stamp",
-      align: "left",
-      sortable: false,
-      value: "time_stamp"
-    },
-    { text: "Ph1_Voltage_Variation", value: "Ph1_Voltage_Variation" },
-    { text: "Ph2_Voltage_Variation", value: "Ph2_Voltage_Variation" },
-    { text: "Ph3_Voltage_Variation", value: "Ph3_Voltage_Variation" }
-  ];
+  // search = "";
+  // headers = [
+  //   {
+  //     text: "Time Stamp",
+  //     align: "left",
+  //     sortable: false,
+  //     value: "time_stamp"
+  //   },
+  //   { text: "Ph1_Voltage_Variation", value: "Ph1_Voltage_Variation" },
+  //   { text: "Ph2_Voltage_Variation", value: "Ph2_Voltage_Variation" },
+  //   { text: "Ph3_Voltage_Variation", value: "Ph3_Voltage_Variation" }
+  // ];
   desserts = [
     {
       time_stamp: "time",
@@ -92,8 +96,8 @@ export default class Statistics extends Vue {
   linedata = {
     data: [
       {
-        x: ["jan", "Feb", "Mar", "April", "May", "June", "July"],
-        y: [20, 80, 40, 65, 13, 75, 15],
+        x: ["08:28", "09:05", "06:20"],
+        y: [20, 80, 40],
         type: "line",
         name: "vh1"
       },
@@ -122,6 +126,7 @@ export default class Statistics extends Vue {
     this.machine = this.formData.machine;
     this.group =  this.formData.group;
     this.stat = this.formData.stat;
+    this.quickTime = this.formData.quickTime;
     this.threshold = this.formData.threshold;
     if(this.group === "MRI Health"){
         this.statList = [
@@ -196,15 +201,16 @@ export default class Statistics extends Vue {
 
   submitTimeInput(){
     this.dialog = false;
-    console.log(this.machine);
-    console.log(this.stat);
-    console.log(this.group);
-    console.log(this.threshold);
+    // console.log(this.machine);
+    // console.log(this.stat);
+    // console.log(this.group);
+    // console.log(this.threshold);
+    this.quickTime = this.quickTime;
     console.log(this.quickTime);
-    console.log(this.fromDate);
-    console.log(this.fromHourMinutes);
-    console.log(this.toDate);
-    console.log(this.toHourMinutes);
+    // console.log(this.fromDate);
+    // console.log(this.fromHourMinutes);
+    // console.log(this.toDate);
+    // console.log(this.toHourMinutes);
     
   }
 

@@ -8,7 +8,8 @@
             <v-select :items="machineList" label="Machine" v-model="machine"></v-select>
           </v-col>
           <v-col cols="3">
-            <v-select :items="groupList" label="Group" v-model="group" @change="clickGroup(group)"></v-select>
+            <v-select :items="groupList" label="Group" v-model="group" 
+              @change="clickGroup(group)"></v-select>
           </v-col>
           <v-col cols="2">
             <v-select :items="statList" label="Stat" v-model="stat" @change="clickStat(stat)"></v-select>
@@ -214,11 +215,7 @@
             <v-tab-item >
               <!-- line-plot -->
               <v-card flat color="basil">
-                <vue-plotly
-                  :data="linedata.data"
-                  :layout="linedata.layout"
-                  :options="linedata.options"
-                />
+               <LinePlot :quickTime = "quickTime"/>
               </v-card>
               <!-- line-plot end -->
             </v-tab-item>
@@ -245,21 +242,7 @@
             <v-tab-item>
               <!-- data-table -->
               <v-card class="tabContent">
-                <v-card-title>
-                  <!-- <div class="flex-grow-1"></div> -->
-                  <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
-                  <div class="flex-grow-1"></div>
-                  <download-csv :data="desserts">
-                    <v-hover>
-                      <template v-slot="{ hover }">
-                        <v-btn text fab small :elevation="hover ? 4 : 0">
-                          <v-icon color="green" size="25">mdi-download</v-icon>
-                        </v-btn>
-                      </template>
-                    </v-hover>
-                  </download-csv>
-                </v-card-title>
-                <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+                  <DataTable :dataSet = "desserts"></DataTable>
               </v-card>
               <!-- data-table-end -->
             </v-tab-item>          
@@ -276,11 +259,7 @@
             <v-tab-item >
               <!-- line-plot -->
               <v-card flat color="basil">
-                <vue-plotly
-                  :data="linedata.data"
-                  :layout="linedata.layout"
-                  :options="linedata.options"
-                />
+                <LinePlot :quickTime = "quickTime"/>
               </v-card>
               <!-- line-plot end -->
             </v-tab-item>
@@ -303,21 +282,7 @@
             <v-tab-item>
               <!-- data-table -->
               <v-card class="tabContent">
-                <v-card-title>
-                  <!-- <div class="flex-grow-1"></div> -->
-                  <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
-                  <div class="flex-grow-1"></div>
-                  <download-csv :data="desserts">
-                    <v-hover>
-                      <template v-slot="{ hover }">
-                        <v-btn text fab small :elevation="hover ? 4 : 0">
-                          <v-icon color="green" size="25">mdi-download</v-icon>
-                        </v-btn>
-                      </template>
-                    </v-hover>
-                  </download-csv>
-                </v-card-title>
-                <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+                <DataTable :dataSet = "desserts"></DataTable>
               </v-card>
               <!-- data-table-end -->
             </v-tab-item>    
