@@ -1,5 +1,6 @@
 <template>
     <v-container>
+      <p>{{quickTime}}</p>
         <vue-plotly
             :data="linedata.data"
             :layout="linedata.layout"
@@ -13,7 +14,7 @@ import Vue from "vue";
 import axios from 'axios';
 //@ts-ignore
 import VuePlotly from "@statnett/vue-plotly";
-import { Component, Prop  } from "vue-property-decorator";
+import { Component, Prop, Watch } from "vue-property-decorator";
 @Component({
    components: {
     VuePlotly
@@ -22,7 +23,15 @@ import { Component, Prop  } from "vue-property-decorator";
 export default class LinePlot extends Vue {
   // @ts-ignore
   @Prop() quickTime;
-  // line- plot
+  // @ts-ignore
+  @Prop() newTime;
+  // @ts-ignore
+
+  @Watch('newTime')
+  onNewTimeChanged(val: string, oldVal: string) {
+    console.log(val)
+  }
+
   linedata = {
     data: [
       {
@@ -36,9 +45,8 @@ export default class LinePlot extends Vue {
     options: {}
   };
   // line-plot end
-
+  
   async created(){
-    console.log("hello world")
       let x = await axios.get("http://vmart.machinesense.com/api/datasources/proxy/1/query?db=telegraf&q=SELECT%20%22pf1mean%22%20FROM%20%22statsd_vmart_4d%22%20WHERE%20(%22company%22%20=~%20/$/%20AND%20%22machine%22%20=~%20/NewBuildTest13112019$/%20AND%20%22datatype%22%20=~%20/raw$/)%20AND%20time%20%3E=%20now()%20-"+this.quickTime+"%20GROUP%20BY%20%22pf1mean%22&epoch=ms");
       let timeList = [];
       let dataList = [];

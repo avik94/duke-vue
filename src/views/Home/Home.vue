@@ -67,7 +67,7 @@
           </v-form>
           <p style="margin:0;font-weight:bold" class="text-center">----OR----</p>
           <!--  -->
-          <v-form class="formContent2">
+          <v-form class="formContent2" ref="form3">
             <!-- To date-->
             <v-menu
               ref="menu2"
@@ -80,7 +80,6 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  :rules="number"
                   v-model="toDate"
                   prepend-icon="mdi-calendar-check"
                   label="To Date"
@@ -112,7 +111,6 @@
                   v-model="toHourMinutes"
                   prepend-icon="mdi-calendar-clock"
                   label="Select Hour & Minutes"
-                  :rules="number"
                   readonly
                   v-on="on"
                 ></v-text-field>
@@ -138,7 +136,6 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  :rules="number"
                   v-model="fromDate"
                   prepend-icon="mdi-calendar-check"
                   label="From Date"
@@ -170,7 +167,6 @@
                   v-model="fromHourMinutes"
                   prepend-icon="mdi-calendar-clock"
                   label="Select Hour & Minutes"
-                  :rules="number"
                   readonly
                   v-on="on"
                 ></v-text-field>

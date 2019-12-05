@@ -5,7 +5,7 @@
         <!-- machine & stat row start -->
         <v-row>
           <v-col cols="3">
-            <v-select :items="machineList" label="Machine" v-model="machine"></v-select>
+            <v-select :items="machineList" label="Machine" v-model="machine" @change="setName(machine)"></v-select>
           </v-col>
           <v-col cols="3">
             <v-select :items="groupList" label="Group" v-model="group" 
@@ -215,7 +215,7 @@
             <v-tab-item >
               <!-- line-plot -->
               <v-card flat color="basil">
-               <LinePlot :quickTime = "quickTime"/>
+               <LinePlot v-bind:quickTime = "quickTime"/>
               </v-card>
               <!-- line-plot end -->
             </v-tab-item>

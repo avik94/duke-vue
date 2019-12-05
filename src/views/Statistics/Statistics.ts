@@ -21,6 +21,7 @@ Vue.component("downloadCsv", JsonCSV);
 
 
 export default class Statistics extends Vue {
+  // avik:any = "";
   // calender
   menu1 = false;
   menu2 = false;
@@ -120,14 +121,20 @@ export default class Statistics extends Vue {
   // line-plot end
 
   created() {
+    let data = JSON.parse(sessionStorage.form);
     // console.log(this.$route.params.name);
+    let machineList = JSON.parse(sessionStorage.machineList)
     this.formData = this.$store.state.formData;
-    this.machineList = this.$store.state.machineList;
-    this.machine = this.formData.machine;
-    this.group =  this.formData.group;
-    this.stat = this.formData.stat;
-    this.quickTime = this.formData.quickTime;
-    this.threshold = this.formData.threshold;
+    this.machineList = machineList;
+    this.machine = data.machine;
+    this.stat = data.stat;
+    this.group = data.group;
+    // this.threshold = data.threshold;
+    this.toDate = data.toDate;
+    this.toHourMinutes = data.toHourMinutes;
+    this.fromDate = data.fromDate;
+    this.fromHourMinutes = data.fromHourMinutes;
+    this.quickTime  = data.quickTime;
     if(this.group === "MRI Health"){
         this.statList = [
           'Voltage(L-N)','Voltage(L-L)', 'Current-3 phase', 'Neutral current', 'Step Current Change (A)', 'PF-3 phase','Voltage variation (%)',                          
@@ -206,7 +213,7 @@ export default class Statistics extends Vue {
     // console.log(this.group);
     // console.log(this.threshold);
     this.quickTime = this.quickTime;
-    console.log(this.quickTime);
+    // console.log(this.quickTime);
     // console.log(this.fromDate);
     // console.log(this.fromHourMinutes);
     // console.log(this.toDate);
@@ -250,4 +257,5 @@ export default class Statistics extends Vue {
 
     }
   }
+  
 }

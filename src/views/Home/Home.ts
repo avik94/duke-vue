@@ -52,6 +52,10 @@ export default class Home extends Vue {
     (v:any) => !!v || 'data is required',
   ]
 
+  number2 = [
+    (v:any) => !!v || 'data is required',
+  ]
+
   test?:any;
   async created(){
     // api call
@@ -69,11 +73,11 @@ export default class Home extends Vue {
       console.log("No Data Found");
     }else{
       let data = JSON.parse(sessionStorage.form);
-      this.threshold = data.threshold;
       // this.companyName = data.companyName;
       this.machine = data.machine;
       this.stat = data.stat;
       this.group = data.group;
+      this.threshold = data.threshold;
       this.toDate = data.toDate;
       this.toHourMinutes = data.toHourMinutes;
       this.fromDate = data.fromDate;
@@ -121,13 +125,14 @@ export default class Home extends Vue {
         toHourMinutes: this.toHourMinutes,
         fromDate : this.fromDate,
         fromHourMinutes: this.fromHourMinutes
-       
       }
       this.$store.commit('storeFormData',formData);
-      this.$store.commit('storeMachine',this.machineListName)
+      this.$store.commit('storeMachine',this.machineListName);
       this.$router.push('data-view/line');
       sessionStorage.setItem('form', JSON.stringify(formData));
+      sessionStorage.setItem('machineList', JSON.stringify(this.machineListName));
       let formDataCopy = {...formData};
+      console.log(formData)
       console.log(formDataCopy);
     }
     
@@ -138,6 +143,8 @@ export default class Home extends Vue {
     this.$refs.form.reset();
     //@ts-ignore
     this.$refs.form2.reset();
+    // @ts-ignore
+    this.$refs.form3.reset();
     sessionStorage.clear();
   }
 
@@ -162,8 +169,6 @@ export default class Home extends Vue {
         'Frequency Variation', 'Drive Temperature'
       ]
     }
-
-    console.log(data);
   }  
   
 }
