@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="2"></v-col>
+      <v-col cols="2">
+        <p>{{myProps}}</p>
+      </v-col>
       <v-col cols="4">
         <v-select
               v-model="eventTime"
@@ -40,13 +42,20 @@
 import Vue from "vue";
 //@ts-ignore
 import VuePlotly from "@statnett/vue-plotly";
-import { Component, Prop  } from "vue-property-decorator";
+import { Component, Prop, Watch  } from "vue-property-decorator";
 @Component({
    components: {
     VuePlotly
   }
 })
 export default class EventTrap extends Vue {
+  // @ts-ignore
+  @Prop() myProps;
+
+  @Watch('myProps')
+  myPropsChanged(val: string, oldVal: string) {
+    console.log(val,oldVal)
+  }
   // @ts-ignore
   @Prop() statData;
 

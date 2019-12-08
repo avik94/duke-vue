@@ -126,6 +126,7 @@ export default class Home extends Vue {
         fromDate : this.fromDate,
         fromHourMinutes: this.fromHourMinutes
       }
+
       this.$store.commit('storeFormData',formData);
       this.$store.commit('storeMachine',this.machineListName);
       this.$router.push('data-view/line');

@@ -122,9 +122,9 @@ export default class Statistics extends Vue {
 
   created() {
     let data = JSON.parse(sessionStorage.form);
-    // console.log(this.$route.params.name);
     let machineList = JSON.parse(sessionStorage.machineList)
     this.formData = this.$store.state.formData;
+    this.allData = this.formData;
     this.machineList = machineList;
     this.machine = data.machine;
     this.stat = data.stat;
@@ -183,6 +183,8 @@ export default class Statistics extends Vue {
   fromHourMinutes = "";
   quickTime  = "";
 
+  allData:any = {};
+
   dialog = false;
   number = [
     (v:any) => !!v || 'data is required',
@@ -208,16 +210,27 @@ export default class Statistics extends Vue {
 
   submitTimeInput(){
     this.dialog = false;
+    let data = {
+      machine: this.machine,
+      stat: this.machine,
+      group: this.group,
+      threshold: this.threshold,
+      quickTime: this.quickTime,
+      fromDate: this.fromDate,
+      fromHourMinutes: this.fromHourMinutes,
+      toDate: this.toDate,
+      toHourMinutes: this.toHourMinutes
+    }
     // console.log(this.machine);
     // console.log(this.stat);
     // console.log(this.group);
     // console.log(this.threshold);
-    this.quickTime = this.quickTime;
     // console.log(this.quickTime);
     // console.log(this.fromDate);
     // console.log(this.fromHourMinutes);
     // console.log(this.toDate);
     // console.log(this.toHourMinutes);
+    this.allData = data;
     
   }
 
@@ -257,5 +270,4 @@ export default class Statistics extends Vue {
 
     }
   }
-  
-}
+}                                                                                                                                                                                                                                                                              
